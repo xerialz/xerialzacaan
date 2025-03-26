@@ -165,8 +165,7 @@
   const minutes = now.getMinutes().toString().padStart(2, '0');
   const dateStr = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
   document.getElementById("datetime").textContent = `${dateStr}, ${hours}:${minutes}`;
-};
-      document.getElementById("datetime").textContent = now.toLocaleString('en-GB', options);
+}
     }
     updateDateTime();
     setInterval(updateDateTime, 1000);
