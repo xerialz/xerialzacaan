@@ -89,7 +89,7 @@
     onmousedown="toggleResult(true)" 
     onmouseup="toggleResult(false)" 
     ontouchstart="toggleResult(true)" 
-    ontouchend="toggleResult(false)"</div>
+    ontouchend="toggleResult(false)"></div>
 
   <script>
     let deck = [
@@ -104,39 +104,37 @@
     let showingResult = false;
 
     function toggleResult(show) {
-  const resultDiv = document.getElementById("result");
-  const datetime = document.getElementById("datetime");
+      const resultDiv = document.getElementById("result");
+      const datetime = document.getElementById("datetime");
 
-  if (show) {
-    runCalculation();
-  } else {
-    resultDiv.style.display = "none";
-    datetime.style.display = "block";
-    showingResult = false;
-  }
-}
-      runCalculation();
+      if (show) {
+        runCalculation();
+      } else {
+        resultDiv.style.display = "none";
+        datetime.style.display = "block";
+        showingResult = false;
+      }
     }
 
     function runCalculation() {
       const input = document.getElementById("content").innerText.trim().toUpperCase();
 
       const normalizedInput = input
-        .replace(/\b(OF\s+)?CLUBS?|ดอกจิก|จิก|ดอก\b/gi, 'C')
-        .replace(/\b(OF\s+)?HEARTS?|หัวใจ|ใจ|หัว|โพธ์แดง|โพแดง\b/gi, 'H')
-        .replace(/\b(OF\s+)?SPADES?|โพดำ|โพธ์ดำ\b/gi, 'S')
-        .replace(/\b(OF\s+)?DIAMONDS?|เพชร|ข้าวหลามตัด|ข้าวหลาม|หลามตัด\b/gi, 'D');
+        .replace(/\b(OF\s+)?CLUBS?\b|ดอกจิก|จิก|ดอก/gi, 'C')
+        .replace(/\b(OF\s+)?HEARTS?\b|หัวใจ|ใจ|หัว|โพธิ์แดง|โพธ์แดง|โพแดง/gi, 'H')
+        .replace(/\b(OF\s+)?SPADES?\b|โพดำ|โพธิ์ดำ|โพธ์ดำ/gi, 'S')
+        .replace(/\b(OF\s+)?DIAMONDS?\b|เพชร|ข้าวหลามตัด|ข้าวหลาม|หลามตัด/gi, 'D');
 
       const matches = normalizedInput.match(/([2-9]|10|J|Q|K|A)\s*([SHDC])\s+(\d{1,2})/);
       const resultDiv = document.getElementById("result");
 
       if (!matches) {
-  resultDiv.style.display = "block";
-  resultDiv.textContent = "กรุณาใส่ไพ่และตำแหน่ง เช่น QS 17";
-  resultDiv.style.color = "red";
-  document.getElementById("datetime").style.display = "none";
-  showingResult = true;
-  return;
+        resultDiv.style.display = "block";
+        resultDiv.textContent = "กรุณาใส่ไพ่และตำแหน่ง เช่น QS 17";
+        resultDiv.style.color = "red";
+        document.getElementById("datetime").style.display = "none";
+        showingResult = true;
+        return;
       }
 
       const card = matches[1] + matches[2];
@@ -144,19 +142,19 @@
       const currentPos = deck.indexOf(card);
 
       if (currentPos === -1 || pos < 1 || pos > 52) {
-  resultDiv.style.display = "block";
-  resultDiv.textContent = "ไพ่ไม่ถูกต้องหรือค่าตำแหน่งไม่ถูกต้อง!";
-  resultDiv.style.color = "red";
-  document.getElementById("datetime").style.display = "none";
-  showingResult = true;
-  return;
-}
+        resultDiv.style.display = "block";
+        resultDiv.textContent = "ไพ่ไม่ถูกต้องหรือค่าตำแหน่งไม่ถูกต้อง!";
+        resultDiv.style.color = "red";
+        document.getElementById("datetime").style.display = "none";
+        showingResult = true;
+        return;
+      }
 
       const cutAt = (currentPos - pos + 52) % 52;
       const cutCard = deck[cutAt];
       resultDiv.style.display = "block";
       resultDiv.textContent = `ตัดไพ่ที่ตำแหน่งที่ ${cutAt + 1} ซึ่งคือไพ่ ${cutCard}`;
-  resultDiv.style.color = "#ccc";
+      resultDiv.style.color = "#ccc";
       document.getElementById("datetime").style.display = "none";
       showingResult = true;
     }
