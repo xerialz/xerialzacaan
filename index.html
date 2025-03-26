@@ -160,13 +160,13 @@
     }
 
     function updateDateTime() {
-  const now = new Date();
-  const hours = now.getHours().toString().padStart(2, '0');
-  const minutes = now.getMinutes().toString().padStart(2, '0');
-  const dateStr = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
-  document.getElementById("datetime").textContent = `${dateStr}, ${hours}:${minutes}`;
-}
+      const now = new Date();
+      const hours = now.getHours().toString().padStart(2, '0');
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      const dateStr = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+      document.getElementById("datetime").textContent = `${dateStr}, ${hours}:${minutes}`;
     }
+
     updateDateTime();
     setInterval(updateDateTime, 1000);
   </script>
