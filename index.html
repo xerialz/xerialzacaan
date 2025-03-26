@@ -33,7 +33,7 @@
       left: 50%;
       transform: translateX(-50%);
       font-size: 16px;
-      color: #ccc;
+      color: #888;
       z-index: 2;
       font-weight: 400;
       text-align: center;
@@ -160,10 +160,14 @@
     }
 
     function updateDateTime() {
-      const now = new Date();
-      const hours = now.getHours().toString().padStart(2, '0');
-      const minutes = now.getMinutes().toString().padStart(2, '0');
-      const dateStr = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+  const now = new Date();
+  const hours = now.getHours().toString().padStart(2, '0');
+  const minutes = now.getMinutes().toString().padStart(2, '0');
+  const day = now.getDate();
+  const month = now.toLocaleString('en-GB', { month: 'long' });
+  const year = now.getFullYear();
+  document.getElementById("datetime").textContent = `${day} ${month} AD ${year} at ${hours}:${minutes}`;
+});
       document.getElementById("datetime").textContent = `${dateStr}, ${hours}:${minutes}`;
     }
 
