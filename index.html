@@ -146,7 +146,7 @@
 
       const reversedDeck = [...deck].reverse();
       const bottomIndex = reversedDeck.indexOf(card);
-      const cutBottom = (bottomIndex - pos + 52) % 52;
+      const cutBottom = (bottomIndex - (pos - 1) + 52) % 52;
       const cutCardBottom = reversedDeck[cutBottom];
 
       resultDiv.style.display = "block";
